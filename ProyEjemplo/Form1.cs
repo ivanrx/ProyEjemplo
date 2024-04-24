@@ -16,5 +16,17 @@ namespace ProyEjemplo
         {
             InitializeComponent();
         }
+
+        private void firmaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Firma firma = new Firma();
+            firma.ShowDialog();
+        }
+
+        private void juegoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Juego juego = new Juego();
+            juego.ShowDialog();
+        }
     }
 }
