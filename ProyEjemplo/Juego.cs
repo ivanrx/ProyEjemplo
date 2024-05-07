@@ -20,6 +20,9 @@ namespace ProyEjemplo
         ClsNaves objNaveJugador = new ClsNaves();
         ClsNaves objNaveEnemigo = new ClsNaves();
 
+        List<ClsNaves> ListaNaves = new List<ClsNaves>();
+
+        int puntaje = 0;
 
         private void Juego_Load(object sender, EventArgs e)
         {
@@ -35,6 +38,7 @@ namespace ProyEjemplo
             if (contador<15)
             {
                 objNaveEnemigo.CrearEnemigo();
+                ListaNaves.Add(objNaveEnemigo);
                 objNaveEnemigo.imgNave.Location = new Point(auxiliarX += 50, objNaveEnemigo.imgNave.Location.Y);
                 Controls.Add(objNaveEnemigo.imgNave);
 
@@ -60,6 +64,13 @@ namespace ProyEjemplo
                     objNaveJugador.imgNave.Location.X + 10,
                     objNaveJugador.imgNave.Location.Y);
             }
+        }
+
+
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+
         }
     }
 }

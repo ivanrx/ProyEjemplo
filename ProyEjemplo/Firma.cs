@@ -56,5 +56,25 @@ namespace ProyEjemplo
                 }
             }
         }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(bmpFirma != null)
+                {
+                    SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+                    saveFileDialog1.Title = "Guardar firma como";
+                    saveFileDialog1.FileName = "firma.jpg";
+
+                    if(saveFileDialog1.ShowDialog() == DialogResult.OK) bmpFirma.Save(saveFileDialog1.FileName);
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
+        }
     }
 }
