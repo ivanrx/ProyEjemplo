@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClsNaves.cs" />
+    <Compile Include="ClsDisparo.cs" />
     <Compile Include="Firma.cs">
       <SubType>Form</SubType>
     </Compile>

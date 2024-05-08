@@ -16,11 +16,12 @@ namespace ProyEjemplo
         {
             InitializeComponent();
         }
-
+        ClsDisparo ObjDisparo;
         ClsNaves objNaveJugador = new ClsNaves();
         ClsNaves objNaveEnemigo = new ClsNaves();
 
         List<ClsNaves> ListaNaves = new List<ClsNaves>();
+        List<ClsDisparo> ListaDisparos = new List<ClsDisparo>();
 
         int puntaje = 0;
 
@@ -64,13 +65,32 @@ namespace ProyEjemplo
                     objNaveJugador.imgNave.Location.X + 10,
                     objNaveJugador.imgNave.Location.Y);
             }
+
+            if(e.KeyCode == Keys.Space)
+            {
+                ObjDisparo = new ClsDisparo();
+                ObjDisparo.crearDisparo(new Point (objNaveJugador.imgNave.Location.X + 45, objNaveJugador.imgNave.Location.Y));
+                Controls.Add(ObjDisparo.disparo);
+                ListaDisparos.Add(ObjDisparo);
+                timer2.Enabled = true;
+            }
         }
 
 
 
         private void timer2_Tick(object sender, EventArgs e)
         {
+            ObjDisparo.disparo.Location = new Point(ObjDisparo.disparo.Location.X, ObjDisparo.disparo.Location.Y - 10);
 
+            
+
+            if(ObjDisparo.disparo.Bounds.IntersectsWith(objNaveEnemigo.imgNave.Bounds))
+            {
+                puntaje += 10;
+                lblPuntaje.Text = "Puntaje +" + puntaje.ToString();
+
+                objNaveEnemigo.imgNave.Dispose();
+            }
         }
     }
 }
