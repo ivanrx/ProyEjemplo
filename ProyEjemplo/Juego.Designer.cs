@@ -42,13 +42,14 @@
             // 
             // timer2
             // 
+            this.timer2.Enabled = true;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // lblPuntaje
             // 
             this.lblPuntaje.AutoSize = true;
-            this.lblPuntaje.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.lblPuntaje.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblPuntaje.BackColor = System.Drawing.Color.Transparent;
+            this.lblPuntaje.ForeColor = System.Drawing.Color.Navy;
             this.lblPuntaje.Location = new System.Drawing.Point(730, 9);
             this.lblPuntaje.Name = "lblPuntaje";
             this.lblPuntaje.Size = new System.Drawing.Size(58, 13);
@@ -59,7 +60,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.BackColor = System.Drawing.Color.Linen;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.lblPuntaje);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

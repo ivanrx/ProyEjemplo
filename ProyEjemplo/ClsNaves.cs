@@ -70,10 +70,16 @@ namespace ProyEjemplo
                     imgNave.Image = Properties.Resources.enemigo2;
                     break;
             }
-
-            
-
             imgNave.Location = new System.Drawing.Point(posX, posY);
+        }
+
+        public void CrearBoss()
+        {
+            imgNave = new PictureBox();
+            imgNave.SizeMode = PictureBoxSizeMode.StretchImage;
+            imgNave.Size = new System.Drawing.Size(100, 100);
+            imgNave.Image = Properties.Resources.enemigo1;
+            imgNave.Location = new System.Drawing.Point(100, 100);
         }
     }
 }

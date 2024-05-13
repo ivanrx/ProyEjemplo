@@ -16,12 +16,12 @@ namespace ProyEjemplo
         {
             InitializeComponent();
         }
-        ClsDisparo ObjDisparo;
+        
         ClsNaves objNaveJugador = new ClsNaves();
         ClsNaves objNaveEnemigo = new ClsNaves();
 
-        List<ClsNaves> ListaNaves = new List<ClsNaves>();
-        List<ClsDisparo> ListaDisparos = new List<ClsDisparo>();
+        List<Control> ListaNaves = new List<Control>();
+        
 
         int puntaje = 0;
 
@@ -39,9 +39,10 @@ namespace ProyEjemplo
             if (contador<15)
             {
                 objNaveEnemigo.CrearEnemigo();
-                ListaNaves.Add(objNaveEnemigo);
                 objNaveEnemigo.imgNave.Location = new Point(auxiliarX += 50, objNaveEnemigo.imgNave.Location.Y);
                 Controls.Add(objNaveEnemigo.imgNave);
+                ListaNaves.Add(objNaveEnemigo.imgNave);
+                objNaveEnemigo.imgNave.Tag = "Enemigo";
 
                 contador++;
             }
@@ -68,29 +69,74 @@ namespace ProyEjemplo
 
             if(e.KeyCode == Keys.Space)
             {
-                ObjDisparo = new ClsDisparo();
-                ObjDisparo.crearDisparo(new Point (objNaveJugador.imgNave.Location.X + 45, objNaveJugador.imgNave.Location.Y));
-                Controls.Add(ObjDisparo.disparo);
-                ListaDisparos.Add(ObjDisparo);
-                timer2.Enabled = true;
+                Disparar();
             }
         }
 
+        private void Disparar()
+        {
+            PictureBox disparo = new PictureBox();
+            disparo.Width = 10;
+            disparo.Height = 10;
+            disparo.BackColor = System.Drawing.Color.Yellow;
+            disparo.Tag = "Disparo";
+            disparo.Left = objNaveJugador.imgNave.Left + 45;
+            disparo.Top = objNaveJugador.imgNave.Top - 10;
+            this.Controls.Add(disparo);
+        }
 
+        private void MovimientoDisparo()
+        {
+            foreach(Control x in this.Controls)
+            {
+                if(x is PictureBox && x.Tag == "Disparo")
+                {
+                    x.Top -= 10;
+                    if(x.Top < 0)
+                    {
+                        this.Controls.Remove(x);
+                    }
+                }
+            }
+        }
+
+        private void Colision()
+        {
+            foreach(Control d in this.Controls)
+            {
+                foreach(Control e in this.Controls)
+                {
+                    if(d is PictureBox && d.Tag == "Disparo")
+                    {
+                        if(e is PictureBox && e.Tag == "Enemigo")
+                        {
+                            if(d.Bounds.IntersectsWith(e.Bounds))
+                            {
+                                this.Controls.Remove(e);
+                                this.Controls.Remove(d);
+                                ListaNaves.Remove(e);
+                                puntaje++;
+                                lblPuntaje.Text = "Puntaje: " + puntaje;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void Boss()
+        {
+            if(ListaNaves.Count == 0)
+            {
+                objNaveEnemigo.CrearBoss();
+            }
+        }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            ObjDisparo.disparo.Location = new Point(ObjDisparo.disparo.Location.X, ObjDisparo.disparo.Location.Y - 10);
-
-            
-
-            if(ObjDisparo.disparo.Bounds.IntersectsWith(objNaveEnemigo.imgNave.Bounds))
-            {
-                puntaje += 10;
-                lblPuntaje.Text = "Puntaje +" + puntaje.ToString();
-
-                objNaveEnemigo.imgNave.Dispose();
-            }
+            MovimientoDisparo();
+            Colision();
+            Boss();
         }
     }
 }
