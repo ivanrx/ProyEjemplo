@@ -20,7 +20,7 @@ namespace ProyEjemplo
         ClsNaves objNaveJugador = new ClsNaves();
         ClsNaves objNaveEnemigo = new ClsNaves();
 
-        List<Control> ListaNaves = new List<Control>();
+        List<ClsNaves> ListaNaves = new List<ClsNaves>();
         
 
         int puntaje = 0;
@@ -34,6 +34,7 @@ namespace ProyEjemplo
         int auxiliarX = 0;
         int contador = 0;
 
+        //Crear enemigos
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (contador<15)
@@ -41,7 +42,7 @@ namespace ProyEjemplo
                 objNaveEnemigo.CrearEnemigo();
                 objNaveEnemigo.imgNave.Location = new Point(auxiliarX += 50, objNaveEnemigo.imgNave.Location.Y);
                 Controls.Add(objNaveEnemigo.imgNave);
-                ListaNaves.Add(objNaveEnemigo.imgNave);
+                ListaNaves.Add(objNaveEnemigo);
                 objNaveEnemigo.imgNave.Tag = "Enemigo";
 
                 contador++;
@@ -52,6 +53,7 @@ namespace ProyEjemplo
             }
         }
 
+        //Movimientos
         private void Juego_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Left) 
@@ -114,29 +116,23 @@ namespace ProyEjemplo
                             {
                                 this.Controls.Remove(e);
                                 this.Controls.Remove(d);
-                                ListaNaves.Remove(e);
                                 puntaje++;
                                 lblPuntaje.Text = "Puntaje: " + puntaje;
+                                if(puntaje > 14)
+                                {
+                                    objNaveEnemigo.CrearBoss();
+
+                                }
                             }
                         }
                     }
                 }
             }
         }
-
-        private void Boss()
-        {
-            if(ListaNaves.Count == 0)
-            {
-                objNaveEnemigo.CrearBoss();
-            }
-        }
-
         private void timer2_Tick(object sender, EventArgs e)
         {
             MovimientoDisparo();
             Colision();
-            Boss();
         }
     }
 }

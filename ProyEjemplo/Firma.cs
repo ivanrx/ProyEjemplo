@@ -63,12 +63,14 @@ namespace ProyEjemplo
             {
                 if(bmpFirma != null)
                 {
-                    SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-                    saveFileDialog1.Title = "Guardar firma como";
-                    saveFileDialog1.FileName = "firma.jpg";
+                    bmpFirma.Save("Firma.jpg");
+                    //SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-                    if(saveFileDialog1.ShowDialog() == DialogResult.OK) bmpFirma.Save(saveFileDialog1.FileName);
+                    //saveFileDialog1.Title = "Guardar firma como";
+                    //saveFileDialog1.FileName = "firma.jpg";
+
+                    //if(saveFileDialog1.ShowDialog() == DialogResult.OK) bmpFirma.Save(saveFileDialog1.FileName);
                 }
             }
             catch (Exception error)

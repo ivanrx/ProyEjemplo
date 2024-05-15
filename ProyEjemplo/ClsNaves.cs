@@ -39,8 +39,8 @@ namespace ProyEjemplo
             imgNave.Image = Properties.Resources.nave;
         }
 
+        //Crear enemigos en posiciones aleatorias
         Random aleatorioEnemigo = new Random();
-        Random aleatorioPosX = new Random();
         Random aleatorioPosY = new Random();
         int codigoEnemigo;
 
@@ -52,7 +52,6 @@ namespace ProyEjemplo
             imgNave.SizeMode = PictureBoxSizeMode.StretchImage;
             imgNave.Size = new System.Drawing.Size(50, 50);
 
-            posX = aleatorioPosX.Next(0,400);
             posY = aleatorioPosY.Next(0,200);
 
             switch (codigoEnemigo)
@@ -70,7 +69,7 @@ namespace ProyEjemplo
                     imgNave.Image = Properties.Resources.enemigo2;
                     break;
             }
-            imgNave.Location = new System.Drawing.Point(posX, posY);
+            imgNave.Location = new System.Drawing.Point(0, posY);
         }
 
         public void CrearBoss()
@@ -79,7 +78,7 @@ namespace ProyEjemplo
             imgNave.SizeMode = PictureBoxSizeMode.StretchImage;
             imgNave.Size = new System.Drawing.Size(100, 100);
             imgNave.Image = Properties.Resources.enemigo1;
-            imgNave.Location = new System.Drawing.Point(100, 100);
+            imgNave.Location = new System.Drawing.Point(400, 100);
         }
     }
 }
