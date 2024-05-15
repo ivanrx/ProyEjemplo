@@ -57,15 +57,32 @@ namespace ProyEjemplo
             }
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if(bmpFirma != null)
-                {
+         private void Grabar_Click(object sender, EventArgs e)
+ {
 
-                    bmpFirma.Save("Firma.jpg");
-                   
+     try
+     {
+         string directorioFirmas = Path.Combine(Application.StartupPath, "FIRMAS");
+
+         if (!Directory.Exists(directorioFirmas))
+         {
+             Directory.CreateDirectory(directorioFirmas);
+         }
+
+         DateTime fechaHoraActual = DateTime.Now;
+
+         string nombreArchivo = $"{fechaHoraActual.Year}.{fechaHoraActual.Month:00}.{fechaHoraActual.Day:00}.{fechaHoraActual.Hour:00}.{fechaHoraActual.Minute:00}.jpg";
+
+         string rutaFirma = Path.Combine(directorioFirmas, nombreArchivo);
+
+         bmpFirma.Save(rutaFirma);
+
+         MessageBox.Show($"Firma grabada como {nombreArchivo} en la carpeta FIRMAS.");
+     }
+     catch (Exception error)
+     {
+         MessageBox.Show("Error al grabar la firma: " + error.Message);
+     }
                 }
             }
             catch (Exception error)
